@@ -13,6 +13,7 @@ contract KIP17Seller is Ownable {
     bool private _onSale = false;
     uint256 private _remainAmount;
     uint256 private _maxAmountPerTx;
+    uint256 private _balance;
 
     // Optional mapping for tokens
     uint256 private _tokenPrice;
@@ -41,7 +42,7 @@ contract KIP17Seller is Ownable {
         return true;
     }
 
-    function stopSale() external onlyOwner returns (bool) {
+    function stopSale() external onlyOwner returns (bool) { // for pause, stop
         require(_onSale,
             "KIP17Seller: Not on sale"
         );
@@ -55,18 +56,6 @@ contract KIP17Seller is Ownable {
             "KIP17Seller: On sale"
         );
         _onSale = true;
-
-        return true;
-    }
-
-    function finishSale() external onlyOwner returns (bool) {
-        require(!_onSale,
-            "KIP17Seller: On sale"
-        );
-        for (uint256 i=0; i<_tokenList.length; i++) {
-            // send remain tokens to owner
-            _kip17Token.transferFrom(address(this), owner(), _tokenList[i]);
-        }
 
         return true;
     }
@@ -102,13 +91,19 @@ contract KIP17Seller is Ownable {
         for (uint256 i=0; i<_amount; i++) {
             uint256 _tokenId = _tokenList[_tokenList.length - 1];
             _tokenList.length--;
-            _kip17Token.transferFrom(address(this), msg.sender, _tokenId);
+            _kip17Token.transferFrom(owner(), msg.sender, _tokenId);
         }
         
-        owner().transfer(_pays);
+        _balance += _pays;
         if (_refunds > 0) {
             msg.sender.transfer(_refunds);
         }
+
+        return true;
+    }
+
+    function withdrawAll() external onlyOwner returns (bool) {
+        msg.sender.transfer(_balance);
 
         return true;
     }

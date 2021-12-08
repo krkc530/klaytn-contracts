@@ -7,10 +7,10 @@ const ownerPrivateKey = '0x97ffef4ae3f6e4a922075a7fc0bbc8b26828fc5fc3ca5d42e7f7e
 const contractABI = JSON.parse(fs.readFileSync('build/contracts/KIP17Seller.json')).abi;
 const contract = caver.contract.create(
     contractABI, 
-    '0x4F606d8BF44c2765d4964ff38f39c092F230EF43',
+    '0x3E06B8BDfed31c35Ecbda6d307E687c95Df87b20',
     {from: ownerAccount}
 )
-const tokenAddress = '0x5290Ef68696B773610137c5b088EEF4e1F3d62Af'
+const tokenAddress = '0x6DB42DDFc81ea890A03198dAa85db73e4d87aFD4'
 const kip17 = new caver.kct.kip17(tokenAddress)
 const tokenURI = 'testURI'
 const keyring = caver.wallet.keyring.createFromPrivateKey(ownerPrivateKey)
@@ -22,21 +22,29 @@ caver.wallet.add(keyring2)
 kip17.options.from = ownerAccount
 var now = Math.floor(new Date().getTime() / 1000)
 console.log(now)
+// console.log(keyring2.address)
 
 // kip17.totalSupply().then(console.log)
-
-
-// kip17.mintWithTokenURI(contract.options.address, 1, tokenURI).then(console.log)
-// kip17.mintWithTokenURI(contract.options.address, 2, tokenURI).then(console.log)
-// kip17.mintWithTokenURI(contract.options.address, 3, tokenURI).then(console.log)
-// kip17.balanceOf(contract.options.address).then(console.log)
-// kip17.balanceOf(keyring2.address).then(console.log)
-
+// kip17.getApproved(1).then(console.log)
+// kip17.getApproved(2).then(console.log)
+// kip17.getApproved(3).then(console.log)
 // kip17.ownerOf(1).then(console.log)
 // kip17.ownerOf(2).then(console.log)
 // kip17.ownerOf(3).then(console.log)
+
+
+// kip17.mintWithTokenURI(ownerAccount, 1, tokenURI).then(console.log)
+// kip17.mintWithTokenURI(ownerAccount, 2, tokenURI).then(console.log)
+// kip17.mintWithTokenURI(ownerAccount, 3, tokenURI).then(console.log)
+// kip17.approve(contract.options.address, 1).then(console.log)
+// kip17.approve(contract.options.address, 2).then(console.log)
+// kip17.approve(contract.options.address, 3).then(console.log)
+// kip17.balanceOf(contract.options.address).then(console.log)
+// kip17.balanceOf(keyring2.address).then(console.log)
+
 // caver.rpc.klay.getBalance(ownerAccount).then(console.log)
 // caver.rpc.klay.getBalance(keyring2.address).then(console.log)
+// caver.rpc.klay.getBalance(contract.options.address).then(console.log)
 
 // contract.send(
 //     {
@@ -53,10 +61,10 @@ console.log(now)
 //         gas: 1000000,
 //     },
 //     'startOnSale',
-//     [1, 2, 3],
-//     7, //price
+//     [1, 2],
+//     5000, //price
 //     now, //time
-//     2 // max per tx
+//     1 // max per tx
 // )
 // .then(console.log)
 
@@ -74,9 +82,18 @@ console.log(now)
 //     {
 //         from: keyring2.address,
 //         gas: 1000000,
-//         value: 7
+//         value: 5000 * amount
 //     },
 //     'purchase',
-//     1
+//     amount
+// )
+// .then(console.log)
+
+// contract.send(
+//     {
+//         from: ownerAccount,
+//         gas: 1000000,
+//     },
+//     'withdrawAll',
 // )
 // .then(console.log)
