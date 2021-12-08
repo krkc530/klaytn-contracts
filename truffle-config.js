@@ -26,12 +26,12 @@ const path = require("path");
 const Caver = require('caver-js')
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const accessKeyId = "ACCESS_KEY";
-const secretAccessKey = "SECRET_KEY";
+const accessKeyId = "KASK2QQFNAFNPCH4YTPQUI70";
+const secretAccessKey = "QbIKE9ZZNDaQETFf2eD-817Q96LrN3aPJkB87oIE";
 
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
-const privateKey = "0x123";
-const cypressPrivateKey = "0x456";
+const privateKey = "0x604483d95d92715e0df4a192e84f3ad5019e27c9c558bf5ae551902f89ff63cc";
+const cypressPrivateKey = "0x604483d95d92715e0df4a192e84f3ad5019e27c9c558bf5ae551902f89ff63cc";
 
 module.exports = {
   /**

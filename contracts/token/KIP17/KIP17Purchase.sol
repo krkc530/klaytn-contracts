@@ -1,26 +1,19 @@
 pragma solidity ^0.5.0;
 
 import "./KIP17Token.sol";
+import "../../ownership/Ownable.sol";
 
 /**
  * @title KIP17Purchase
  * @dev KIP17 purchase logic.
  */
-contract KIP17Purchase {
+contract KIP17Purchase is Ownable {
     // Optional mapping for tokens
     mapping(address => mapping(uint256 => uint256)) private _tokenPrice;
     mapping(address => mapping(uint256 => uint256)) private _tokenLaunchTime;
 
-    // The owner receives payment
-    address payable _owner;
-
     constructor () public {
-        _owner = msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == _owner, "KIP17Purchase: caller is not owner");
-        _;
+        // solhint-disable-previous-line no-empty-blocks
     }
 
     /**
@@ -114,7 +107,7 @@ contract KIP17Purchase {
         );
 
         tokenContract.transferFrom(address(this), msg.sender, tokenId);
-        _owner.transfer(msg.value);
+        owner().transfer(msg.value);
         _clearInfo(contractAddress, tokenId);
         return true;
     }
