@@ -69,14 +69,14 @@ console.log(now)
 // )
 // .then(console.log)
 
-var amount = 1
-contract.send(
-    {
-        from: keyring2.address,
-        gas: 1000000,
-        value: amount * 7
-    },
-    'purchase',
-    amount
-)
-.then(console.log)
+// var amount = 1
+// contract.send(
+//     {
+//         from: keyring2.address,
+//         gas: 1000000,
+//         value: 7
+//     },
+//     'purchase',
+//     1
+// )
+// .then(console.log)
