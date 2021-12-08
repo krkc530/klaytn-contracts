@@ -73,7 +73,7 @@ contract KIP17Seller is Ownable {
             "KIP17Seller: Exceeds max amount for tx"
         );
 
-        require(msg.value == _tokenPrice * amount, 
+        require(msg.value >= _tokenPrice * amount, 
             "KIP17Seller: Invalid msg.value or amount"
         );
 
@@ -85,8 +85,8 @@ contract KIP17Seller is Ownable {
         if (amount > _tokenList.length) {
             _amount = _tokenList.length;
         }
-        uint256 _pays = _amount * _tokenPrice;
-        uint256 _refunds = msg.value - _pays;
+        uint256 _refunds = (amount - _amount) * _tokenPrice;
+        uint256 _pays = msg.value - _refunds;
 
         for (uint256 i=0; i<_amount; i++) {
             uint256 _tokenId = _tokenList[_tokenList.length - 1];
