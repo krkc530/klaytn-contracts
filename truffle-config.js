@@ -30,8 +30,8 @@ const accessKeyId = "KASK2QQFNAFNPCH4YTPQUI70";
 const secretAccessKey = "QbIKE9ZZNDaQETFf2eD-817Q96LrN3aPJkB87oIE";
 
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
-const privateKey = "0x604483d95d92715e0df4a192e84f3ad5019e27c9c558bf5ae551902f89ff63cc";
-const cypressPrivateKey = "0x604483d95d92715e0df4a192e84f3ad5019e27c9c558bf5ae551902f89ff63cc";
+const privateKey = "0x588633762ee42a281c576a72debd1d9a2669219c484bfa1e06dabcdd7f8cf99f";
+const cypressPrivateKey = "0x588633762ee42a281c576a72debd1d9a2669219c484bfa1e06dabcdd7f8cf99f";
 
 module.exports = {
   /**
